@@ -34,6 +34,20 @@ int main(int argc, char *argv[])
     {
         for(int i = 1; i < argc; i++)
         {
+            // --help
+            if(not strcmp(argv[i], "--help"))
+            {
+                puts("Flags are unstable");
+                puts("--help | --version | --num_base <num>");
+                goto normal_exit;
+            }
+            // --version
+            if(not strcmp(argv[i], "--version"))
+            {
+                puts(APP_VERSION_STRING);
+                goto normal_exit;
+            }
+            // --num_base
             if(not strcmp(argv[i], "--num_base"))
             {
                 if(argc - 1 - i > 0)
@@ -42,7 +56,7 @@ int main(int argc, char *argv[])
                     config_struct.number_base = atoi(argv[i]);
                 }
                 else
-                    goto ERROR_STD;
+                    goto error_std;
                 continue;
             }
         }
@@ -56,7 +70,7 @@ int main(int argc, char *argv[])
         printf("Bineary:\t%0#10b\n", rand_number);
 
         // get input
-        printf("Convert Number Base to 3 %d", config_struct.number_base);
+        printf("Convert Number Base to %d\n", config_struct.number_base);
         input_string = rl_gets("Input:\t");
         // some break way
         if(not strcmp(input_string, "exit"))
@@ -75,8 +89,9 @@ int main(int argc, char *argv[])
         puts("====NEXT====");
     }
 
+    normal_exit:
     return 0;
-    ERROR_STD:
+    error_std:
     puts("Standard error");
     return 1;
 }

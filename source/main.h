@@ -8,6 +8,8 @@
 #include <time.h>
 #include <readline/readline.h>
 
+#define APP_VERSION_STRING "develop"
+
 struct config_struct
 {
     uint8_t number_base;

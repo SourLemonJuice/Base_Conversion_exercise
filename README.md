@@ -2,15 +2,22 @@
 
 ```text
 $ ./main.out
-Bineary(0b):    0b11010101
-Hexadecimal:    0x1a
-Wrong
-right one is:   0xd5
+Bineary:        0b01101000
+Convert Number Base to 16
+Input:  68
+Right
 ====NEXT====
-Bineary(0b):    0b10100011
-Hexadecimal:    0x
+Bineary:        0b10000011
+Convert Number Base to 16
+Input:
+```
+
+## Flags
+
+```text
+--help | --version | --num_base <num>
 ```
 
 ## Todo List
 
-- Include README
+- Include README.md
