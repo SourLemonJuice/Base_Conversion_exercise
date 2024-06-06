@@ -8,5 +8,11 @@
 #include <time.h>
 #include <readline/readline.h>
 
-int main(int argc, int *argv[]);
+struct config_struct
+{
+    uint8_t number_base;
+};
+
+int main(int argc, char *argv[]);
 char *rl_gets (const char *prompt_string);
+int confit_structure_init(struct config_struct *config);

@@ -21,11 +21,32 @@ char *rl_gets (const char *prompt_string)
     return line_read;
 }
 
-int main(int argc, int *argv[])
+int main(int argc, char *argv[])
 {
+    struct config_struct config_struct;
+    confit_structure_init(&config_struct);
     char *input_string = NULL;
     int rand_number;
     int input_number;
+
+    /* handle CLI flags */
+    if(argc > 1)
+    {
+        for(int i = 1; i < argc; i++)
+        {
+            if(not strcmp(argv[i], "--num_base"))
+            {
+                if(argc - 1 - i > 0)
+                {
+                    i++;
+                    config_struct.number_base = atoi(argv[i]);
+                }
+                else
+                    goto ERROR_STD;
+                continue;
+            }
+        }
+    }
 
     while(true)
     {
@@ -35,11 +56,12 @@ int main(int argc, int *argv[])
         printf("Bineary:\t%0#10b\n", rand_number);
 
         // get input
-        input_string = rl_gets("Hexadecimal:\t0x");
+        printf("Convert Number Base to 3 %d", config_struct.number_base);
+        input_string = rl_gets("Input:\t");
         // some break way
         if(not strcmp(input_string, "exit"))
             break;
-        input_number = strtol(input_string, NULL, 16);
+        input_number = strtol(input_string, NULL, config_struct.number_base);
 
         // is eq?
         if(rand_number == input_number)
@@ -53,5 +75,14 @@ int main(int argc, int *argv[])
         puts("====NEXT====");
     }
 
+    return 0;
+    ERROR_STD:
+    puts("Standard error");
+    return 1;
+}
+
+int confit_structure_init(struct config_struct *config)
+{
+    config->number_base = 16;
     return 0;
 }
